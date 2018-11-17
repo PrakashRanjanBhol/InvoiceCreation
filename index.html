@@ -1,0 +1,146 @@
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/script.js"></script>
+<script src="lib/jquery-ui.js"></script>
+
+<link href="lib/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="lib/jquery-ui.css">
+<link rel="stylesheet" href="lib/style.css">
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+<h1 align="center">Invoice Creation</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-1">
+                        <div class="col-md-4" style="margin-top:5%">
+                            <textarea class="form-control" rows="2" id="billFrom" placeholder="who is this invoice from?(required)"></textarea><br>
+							<h6 class="invoice">Bill To</h6><textarea class="form-control" id="billTo" rows="2" placeholder="who is this invoice to?(required)"></textarea>
+                        </div>
+						
+						<div class="col-md-4">
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <h3 class="invoice">INVOICE</h3>
+						
+						<div class="form-group form-inline" style="float:right;">
+							<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">#</span>
+						  </div>
+							  <input type="text" class="form-control" id="invoiceId">
+							</div>
+							
+                            <div class="form-group form-inline" style="float:right;padding-top:4%">
+							<label>Date &nbsp; </label>
+							  <input type="text" class="form-control datepicker" id="date">
+							</div>
+							
+							<div class="form-group form-inline" style="float:right">
+							<label>Due Date &nbsp; </label>
+							  <input type="text" class="form-control datepicker" id="dueDate">
+							</div>
+							
+							<input type="text" class="form-control" id="balanceAmt" placeholder="Balance Due" style="text-align:center" readonly>
+							
+						  </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row p-1">
+                        <div class="col-md-12">
+                            <table class="table firstTable">
+							<thead>
+							  <tr style="background-color: black;">
+								<th style="width: 40%">Item</th>
+								<th style="width: 20%">Quantity</th>
+								<th style="width: 20%">Rate</th>
+								<th style="width: 15%">Amount</th>
+								<th style="width: 5%"></th>
+							  </tr>
+							</thead>
+							<tbody id="tbody">
+							  <tr>
+								<td><input type="text" class="form-control prod" id="item0" placeholder="Description of service or product.."></td>
+								<td><input type="number" class="form-control prod" id="qty0" onkeyup="CalculateTotal(0)"></td>
+								<td><input type="number" class="form-control prod" id="rate0" onkeyup="CalculateTotal(0)"></td>
+								<td><input type="hidden" class="form-control totalAmt" id="total0"><label id="totalLabel0" style="color:black"></label></td>
+								<th style="width: 5%"></th>
+							  </tr>
+							</tbody>
+						  </table>
+						  <button class="btn btn-primary pull-left" onclick=addNewRow()>+ Line Item</button>
+						  <div class="row clearfix" style="margin-top:20px">
+							
+							<div class="col-md-8">
+							</div>
+							
+							<div class="pull-right col-md-4">
+							  <table class="table table-bordered table-hover" id="tab_logic_total">
+								<tbody>
+								  <tr>
+									<th class="text-center">SubTotal($)</th>
+									<td class="text-center"><input type="text" placeholder='0.00' class="form-control" id="sub_total" readonly/></td>
+								  </tr>
+								  <tr>
+									<th class="text-center">Tax</th>
+									<td class="text-center"><div class="input-group mb-2 mb-sm-0">
+										<input type="number" class="form-control" id="tax" value="0" placeholder='0.00'>
+										<div class="input-group-addon">%</div>
+									  </div></td>
+								  </tr>
+								  <tr>
+									<th class="text-center">Total($)</th>
+									<td class="text-center"><input type="text" id="grand_total" placeholder='0.00' class="form-control" readonly/></td>
+								  </tr>
+								  <tr>
+									<th class="text-center">Amount Paid($)</th>
+									<td class="text-center">
+									<input type="number" id="amount_paid" class="form-control"/></td>
+								  </tr>
+								</tbody>
+							  </table>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-12">
+						
+						<div class="p-1">
+						Notes
+						<textarea class="form-control" rows="1" id="notes" placeholder="Notes - Any relevant information not already covered"></textarea>
+						</div>
+						
+						<div class="p-1">
+						Terms
+						<textarea class="form-control" rows="1" id="terms" placeholder="Terms and condition - late fees,payment methods,delivery scedule"></textarea>
+						</div>
+						</div>
+						
+                        </div>
+						
+                    </div>
+					
+					
+
+                </div>
+            </div>
+        </div>
+		 
+		 <div align="center"><button class="btn btn-primary" onclick="PrintInvoice()">Print</button></div>
+		
+    </div>
+	
+	
+	
+    
+    <input type="hidden" id="hiddenRowNo" value="1">
+
+</div>
+
+
+

@@ -1,0 +1,13 @@
+.invoice{
+font-weight:100;
+}
+
+.firstTable tr {
+   color:#ffff;   
+}
+
+.table td , .table th {
+    padding: -2.25rem !important;;  
+}
+
+
